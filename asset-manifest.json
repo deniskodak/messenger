@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/deniskodak/messenger/static/css/main.9b19ab14.css",
-    "main.js": "/deniskodak/messenger/static/js/main.fca60f24.js",
-    "index.html": "/deniskodak/messenger/index.html",
-    "main.9b19ab14.css.map": "/deniskodak/messenger/static/css/main.9b19ab14.css.map",
-    "main.fca60f24.js.map": "/deniskodak/messenger/static/js/main.fca60f24.js.map"
+    "main.css": "/messenger/static/css/main.9b19ab14.css",
+    "main.js": "/messenger/static/js/main.b63a4f2e.js",
+    "index.html": "/messenger/index.html",
+    "main.9b19ab14.css.map": "/messenger/static/css/main.9b19ab14.css.map",
+    "main.b63a4f2e.js.map": "/messenger/static/js/main.b63a4f2e.js.map"
   },
   "entrypoints": [
     "static/css/main.9b19ab14.css",
-    "static/js/main.fca60f24.js"
+    "static/js/main.b63a4f2e.js"
   ]
 }
