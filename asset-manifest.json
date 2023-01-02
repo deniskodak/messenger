@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/deniskodak/messenger/static/css/main.9b19ab14.css",
+    "main.js": "/deniskodak/messenger/static/js/main.fca60f24.js",
+    "index.html": "/deniskodak/messenger/index.html",
+    "main.9b19ab14.css.map": "/deniskodak/messenger/static/css/main.9b19ab14.css.map",
+    "main.fca60f24.js.map": "/deniskodak/messenger/static/js/main.fca60f24.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9b19ab14.css",
+    "static/js/main.fca60f24.js"
+  ]
+}
