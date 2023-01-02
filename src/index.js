@@ -1,17 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import './index.css'
+import App from './App'
+import {
+  RecoilRoot,
+} from 'recoil';
+import ReactBreakpoints from 'react-breakpoints'
+ 
+const breakpoints = {
+  mobile: 640,
+  tablet: 768,
+  tabletLandscape: 1024,
+  desktop: 1280,
+  desktopLarge: 1536,
+}
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(
+	document.getElementById('root'),
+)
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+	<React.StrictMode>
+    <RecoilRoot>
+      <ReactBreakpoints breakpoints={breakpoints}      debounceResize={true}
+>
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+		<App />
+      </ReactBreakpoints>
+    </RecoilRoot>
+	</React.StrictMode>,
+)
