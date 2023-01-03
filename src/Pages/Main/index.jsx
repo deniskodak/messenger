@@ -5,6 +5,7 @@ import { selectedChanel } from '../../store/atom'
 import LeftSidebar from '../../components/LeftSidebar'
 import RightSidebar from '../../components/RightSidebar'
 import Container from '../../components/Common/Container'
+import Header from '../../components/Common/Header'
 
 const Main = ({ breakpoints, currentBreakpoint }) => {
 	const selectedChanelId = useRecoilValue(selectedChanel)
@@ -19,6 +20,7 @@ const Main = ({ breakpoints, currentBreakpoint }) => {
 
 	return (
 		<Container>
+			<Header />
 			<section className="flex grow">
 				<LeftSidebar {...props} />
 				<RightSidebar {...props} breakpoint={currentBreakpoint} />
