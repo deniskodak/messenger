@@ -1,15 +1,39 @@
 import React from 'react'
 import './App.css'
-import MainSection from './components/MainSection'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
+import ProtectedRoute from './components/ProtectedRoute'
+import Login from './Pages/Login'
+import Main from './Pages/Main'
 
 function App() {
+	const router = createBrowserRouter([
+		{
+			path: '/',
+			element: (
+				<ProtectedRoute isPrivate>
+					<Main />
+				</ProtectedRoute>
+			),
+			errorElement: <h1>not found</h1>,
+		},
+		{
+			path: '/login',
+			element: (
+				<ProtectedRoute redirectPath="/">
+					<Login />
+				</ProtectedRoute>
+			),
+		},
+	])
+
 	return (
-		<div className="App container mx-auto h-screen flex flex-col	">
-			<header>
-				<h1>Denegram</h1>
-			</header>
-			<MainSection />
-		</div>
+		<React.StrictMode>
+			<RouterProvider
+				router={router}
+				fallbackElement={<h1>loading....</h1>}
+			/>
+		</React.StrictMode>
 	)
 }
 
