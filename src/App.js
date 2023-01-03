@@ -7,25 +7,28 @@ import Login from './Pages/Login'
 import Main from './Pages/Main'
 
 function App() {
-	const router = createBrowserRouter([
-		{
-			path: '/',
-			element: (
-				<ProtectedRoute isPrivate>
-					<Main />
-				</ProtectedRoute>
-			),
-			errorElement: <h1>not found</h1>,
-		},
-		{
-			path: '/login',
-			element: (
-				<ProtectedRoute redirectPath="/">
-					<Login />
-				</ProtectedRoute>
-			),
-		},
-	])
+	const router = createBrowserRouter(
+		[
+			{
+				path: '/',
+				element: (
+					<ProtectedRoute isPrivate>
+						<Main />
+					</ProtectedRoute>
+				),
+				errorElement: <h1>not found</h1>,
+			},
+			{
+				path: '/login',
+				element: (
+					<ProtectedRoute redirectPath="/">
+						<Login />
+					</ProtectedRoute>
+				),
+			},
+		],
+		{ basename: '/messenger' },
+	)
 
 	return (
 		<React.StrictMode>
