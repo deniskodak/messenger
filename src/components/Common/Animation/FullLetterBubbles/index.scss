@@ -6,6 +6,7 @@
 	height: 100vh;
 	background: linear-gradient(to bottom right, #ffffff 0%, #38bdf8 100%);
 	z-index: -1;
+	overflow: hidden;
 	
 	.letter {
 		position: absolute;
