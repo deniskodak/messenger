@@ -1,4 +1,8 @@
 import background from './backgroundColor'
 import textColor from './textColor'
 
-export { background, textColor }
+const transition = {
+	color: 'transition-colors duration-200 ease-in',
+}
+
+export { background, textColor, transition }

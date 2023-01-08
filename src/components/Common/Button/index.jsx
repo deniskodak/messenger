@@ -1,5 +1,5 @@
 import React from 'react'
-import { background, textColor } from '../../../Styles'
+import { background, textColor, transition } from '../../../Styles'
 
 const Button = ({ title, onClick }) => {
 
@@ -8,7 +8,7 @@ const Button = ({ title, onClick }) => {
 	return (
 		<button
 			onClick={onClick}
-			className={`rounded-xl px-4 py-1 font-semibold outline-none ${bgClasses} ${textColor.white}`}>
+			className={`rounded-xl border border-slate-300 hover:border-teal-300 focus:border-teal-300 px-4 py-1 font-bold outline-none ${bgClasses} ${textColor.button} ${transition.color} ${textColor.buttonHover}`}>
 			{title}
 		</button>
 	)

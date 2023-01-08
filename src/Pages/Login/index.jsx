@@ -51,7 +51,7 @@ const Login = () => {
 					<div className="text-center md:w-full pt-2 pb-4">
 						<button
 							onClick={currentForms[currentTab].buttonOnClick}
-							className="underline text-slate-500 text-sm md:text-base">
+							className="underline text-slate-300 text-sm md:text-base">
 							{currentForms[currentTab].buttonTitle}
 						</button>
 					</div>

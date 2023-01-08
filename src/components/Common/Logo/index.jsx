@@ -4,12 +4,12 @@ import { BsFillEnvelopeFill, BsFillChatLeftTextFill } from 'react-icons/bs'
 export const Label = ({ textClasses, bgClasses, iconClasses }) => {
 	return (
 		<h1
-			className={`text-sky-800 font-bold tracking-wide font-mono ${textClasses}`}>
+			className={`text-white font-bold tracking-wide font-mono ${textClasses}`}>
 			Quick
-			<span className={`bg-sky-800 text-white px-2 relative ${bgClasses}`}>
+			<span className={`bg-teal-300 text-white px-2 relative ${bgClasses}`}>
 				Messenger
 				<BsFillChatLeftTextFill
-					className={`absolute fill-sky-800 ${iconClasses}`}
+					className={`absolute fill-teal-300 ${iconClasses}`}
 				/>
 			</span>
 		</h1>
@@ -17,7 +17,7 @@ export const Label = ({ textClasses, bgClasses, iconClasses }) => {
 }
 
 export const Icon = ({ iconClasses }) => (
-	<BsFillEnvelopeFill className={`fill-sky-400 ${iconClasses}`} />
+	<BsFillEnvelopeFill className={`fill-teal-300 ${iconClasses}`} />
 )
 
 const FullLogo = ({ labelClasses, iconClasses }) => {
