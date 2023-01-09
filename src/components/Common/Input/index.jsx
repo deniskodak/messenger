@@ -27,10 +27,12 @@ const Input = ({
 	const inputStatusClasses = {
 		error: 'border-red-500 hover:border-red-700 focus:border-red-700',
 		success: 'border-lime-600 hover:border-lime-700 focus:border-lime-700',
+		initial: 'border-slate-300 hover:border-teal-500 focus:border-teal-500',
 	}
 
 	const transitionClasses = 'transition-colors duration-200 ease-in'
-	const labelFocusedClasses = isFocused ? 'text-teal-500' : 'text-slate-300'
+	const labelStatusClasses = currentStatus === error ? 'text-red-500' : 'text-slate-300'
+	const labelFocusedClasses = isFocused ? 'text-teal-500' : labelStatusClasses
 
 	useEffect(() => {
 		setText(value)
@@ -58,12 +60,13 @@ const Input = ({
 		<>
 			<label>
 				{label ? (
-					<span className={`block mb-1 font-semibold cursor-pointer ${labelFocusedClasses} ${transitionClasses}`}>
+					<span
+						className={`block mb-1 font-semibold cursor-pointer ${labelFocusedClasses} ${transitionClasses}`}>
 						{label}
 					</span>
 				) : null}
 				<input
-					class={`${transitionClasses} grow border-2 border-slate-300 outline-0 px-4 py-1 rounded-lg hover:border-teal-500 focus:border-teal-500 bg-transparent text-white placeholder:text-slate-300 ${additionalWindClasses} ${inputStatusClasses[currentStatus]}`}
+					class={`${transitionClasses} grow border-2 outline-0 px-4 py-1 rounded-lg bg-transparent text-white placeholder:text-slate-300 ${additionalWindClasses} ${inputStatusClasses[currentStatus]}`}
 					value={text}
 					type={type}
 					onChange={handleChange}

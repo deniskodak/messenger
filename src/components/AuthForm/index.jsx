@@ -1,23 +1,31 @@
 import React from 'react'
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
+import { withBreakpoints } from 'react-breakpoints'
 import { FcGoogle } from 'react-icons/fc'
-import withBreakpoints from 'react-breakpoints/lib/withBreakpoints'
 
 import Input from '../Common/Input'
 import Button from '../Common/Button'
 import Loader from '../Common/Loader'
 
 import { user } from '../../store/atom'
-import { loginWithEmailAndPassword, registrationWithGoogle } from '../../api/auth'
 import { INPUTS_STATUS } from '../../utils/const'
+import {
+	loginWithEmailAndPassword,
+	registrationWithEmailAndPassword,
+	registrationWithGoogle,
+} from '../../api/auth'
 
-const { success, initial } = INPUTS_STATUS
+const { error, success, initial } = INPUTS_STATUS
 
-const LoginForm = ({currentBreakpoint}) => {
+const AuthForm = ({ isRegistration, currentBreakpoint }) => {
 	const [userData, setUserData] = useRecoilState(user)
 	const [email, setEmail] = useState({ value: '', status: initial })
 	const [password, setPassword] = useState({ value: '', status: initial })
+	const [confirmPassword, setConfirmPassword] = useState({
+		value: '',
+		status: initial,
+	})
 	const [isLoading, setIsLoading] = useState(false)
 
 	const commonInputClasses = 'w-full mb-4'
@@ -25,18 +33,23 @@ const LoginForm = ({currentBreakpoint}) => {
 	const validateFields = () => {
 		const isEmailInvalid = email.status !== success
 		const isPasswordInvalid = password.status !== success
-		if (isEmailInvalid || isPasswordInvalid)
+		const isConfirmPasswordInvalid = isRegistration ? confirmPassword.status !== success : false
+		if (isEmailInvalid || isPasswordInvalid || isConfirmPasswordInvalid)
 			return false
 
 		return true
 	}
 
-	const handleClick = async () => {
+	const handleSignClick = async () => {
 		const areFieldsValid = validateFields()
 		if (!areFieldsValid) return false
+		
+		const authMethod = isRegistration ? registrationWithEmailAndPassword : loginWithEmailAndPassword
+		
 		setIsLoading(true)
+		
 		try {
-			const user = await loginWithEmailAndPassword(
+			const user = await authMethod(
 				email.value,
 				password.value,
 			)
@@ -55,6 +68,17 @@ const LoginForm = ({currentBreakpoint}) => {
 		} finally {
 			setIsLoading(false)
 		}
+	}
+
+	const comparePasswords = (text) => {
+		return text === password.value
+	}
+
+	const handleConfirmChange = ({ value }) => {
+		const isPasswordEqual = comparePasswords(value)
+		const confirmStatus = isPasswordEqual ? success : error
+		console.log(confirmStatus, 'confirm')
+		setConfirmPassword({ value, status: confirmStatus })
 	}
 
 	return (
@@ -76,15 +100,30 @@ const LoginForm = ({currentBreakpoint}) => {
 					placeholder="Type your password"
 					additionalWindClasses={commonInputClasses}
 				/>
-				<Button title="Sign in" onClick={handleClick} />
+				{isRegistration && (
+					<Input
+						type="password"
+						value={confirmPassword.value}
+						onChange={handleConfirmChange}
+						status={confirmPassword.status}
+						label="Confirm password"
+						placeholder="Type your password again"
+						additionalWindClasses={commonInputClasses}
+					/>
+				)}
+				<Button
+					title={isRegistration ? 'Sign up' : 'Sign in'}
+					onClick={handleSignClick}
+				/>
 				<span className="mx-4 text-slate-300 font-semibold">Or</span>
 				<Button
 					title="Sign with"
 					icon={<FcGoogle className="inline ml-1 w-4 h-4" />}
-					onClick={handleGoogleBtnClick} />
+					onClick={handleGoogleBtnClick}
+				/>
 			</Loader>
 		</form>
 	)
 }
 
-export default withBreakpoints(LoginForm)
+export default withBreakpoints(AuthForm)

@@ -1,36 +1,20 @@
 import React, { useState } from 'react'
 
-import LoginForm from '../../components/LoginForm'
+import AuthForm from '../../components/AuthForm'
 import Container from '../../components/Common/Container'
 import FullLogo from '../../components/Common/Logo'
 import FullLetterBubbles from '../../components/Common/Animation/FullLetterBubbles'
-import RegistrationForm from '../../components/RegistrationForm'
-
-const TABS = {
-	log: 'login',
-	reg: 'registration',
-}
 
 const Login = () => {
-	const [currentTab, setCurrentTab] = useState(TABS.log)
+	const [isRegistration, setIsRegistration] = useState(false)
+
 	const labelClasses = {
 		textClasses: 'text-3xl md:text-4xl',
 		bgClasses: 'rounded-xl',
 		iconClasses: '-right-7 -top-5 md:-right-8 md:-top-7',
 	}
 
-	const currentForms = {
-		[TABS.log]: {
-			form: <LoginForm />,
-			buttonTitle: 'Create an account',
-			buttonOnClick: () => setCurrentTab(TABS.reg),
-		},
-		[TABS.reg]: {
-			form: <RegistrationForm />,
-			buttonTitle: 'Already have account?',
-			buttonOnClick: () => setCurrentTab(TABS.log),
-		},
-	}
+	const handleToggleForm = () => setIsRegistration(!isRegistration)
 
 	const iconClasses = 'h-60 w-full md:w-1/2'
 
@@ -46,13 +30,13 @@ const Login = () => {
 						/>
 					</div>
 					<div className="p-4 md:mx-auto md:w-10/12 lg:w-1/2 xl:w-1/3 xl:ml-4">
-						{currentForms[currentTab].form}
+						<AuthForm isRegistration={isRegistration} />
 					</div>
 					<div className="text-center md:w-full pt-2 pb-4">
 						<button
-							onClick={currentForms[currentTab].buttonOnClick}
+							onClick={handleToggleForm}
 							className="underline text-slate-300 text-sm md:text-base">
-							{currentForms[currentTab].buttonTitle}
+							{isRegistration ? 'Already have account?' : 'Create an account' }
 						</button>
 					</div>
 				</div>
