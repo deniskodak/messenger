@@ -14,9 +14,9 @@ const TABS = {
 const Login = () => {
 	const [currentTab, setCurrentTab] = useState(TABS.log)
 	const labelClasses = {
-		textClasses: 'text-4xl',
+		textClasses: 'text-3xl md:text-4xl',
 		bgClasses: 'rounded-xl',
-		iconClasses: '-right-8 -top-7',
+		iconClasses: '-right-7 -top-5 md:-right-8 md:-top-7',
 	}
 
 	const currentForms = {
