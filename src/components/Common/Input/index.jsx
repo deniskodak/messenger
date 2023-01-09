@@ -68,7 +68,7 @@ const Input = ({
 				<input
 					class={`${transitionClasses} grow border-2 outline-0 px-4 py-1 rounded-lg bg-transparent text-white placeholder:text-slate-300 ${additionalWindClasses} ${inputStatusClasses[currentStatus]}`}
 					value={text}
-					type={type}
+					type={type === "email" ? 'text' : type}
 					onChange={handleChange}
 					onFocus={() => setIsFocused(true)}
 					onBlur={() => setIsFocused(false)}

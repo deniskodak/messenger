@@ -15,6 +15,7 @@ import {
 	registrationWithEmailAndPassword,
 	registrationWithGoogle,
 } from '../../api/auth'
+import { useEffect } from 'react'
 
 const { error, success, initial } = INPUTS_STATUS
 
@@ -30,12 +31,31 @@ const AuthForm = ({ isRegistration, currentBreakpoint }) => {
 
 	const commonInputClasses = 'w-full mb-4'
 
+	const handleRefreshFields = () => {
+		const initialState = { value: '', status: initial }
+		setEmail(initialState)
+		setPassword(initialState)
+		setConfirmPassword(initialState)
+	}
+
+	useEffect(() => {
+		handleRefreshFields()
+	}, [isRegistration])
+
 	const validateFields = () => {
-		const isEmailInvalid = email.status !== success
-		const isPasswordInvalid = password.status !== success
-		const isConfirmPasswordInvalid = isRegistration ? confirmPassword.status !== success : false
-		if (isEmailInvalid || isPasswordInvalid || isConfirmPasswordInvalid)
+		const isEmailInvalid = email.status !== success || !email.value
+		const isPasswordInvalid = password.status !== success || !password.value
+		const isConfirmPasswordInvalid = isRegistration
+			? confirmPassword.status !== success || !confirmPassword.value
+			: false
+
+		if (isEmailInvalid || isPasswordInvalid || isConfirmPasswordInvalid) {
+			if (isEmailInvalid) setEmail({ ...email, status: error })
+			if (isPasswordInvalid) setPassword({ ...password, status: error })
+			if (isConfirmPasswordInvalid)
+				setConfirmPassword({ ...confirmPassword, status: error })
 			return false
+		}
 
 		return true
 	}
@@ -43,16 +63,15 @@ const AuthForm = ({ isRegistration, currentBreakpoint }) => {
 	const handleSignClick = async () => {
 		const areFieldsValid = validateFields()
 		if (!areFieldsValid) return false
-		
-		const authMethod = isRegistration ? registrationWithEmailAndPassword : loginWithEmailAndPassword
-		
+
+		const authMethod = isRegistration
+			? registrationWithEmailAndPassword
+			: loginWithEmailAndPassword
+
 		setIsLoading(true)
-		
+
 		try {
-			const user = await authMethod(
-				email.value,
-				password.value,
-			)
+			const user = await authMethod(email.value, password.value)
 			setUserData(user)
 		} catch (error) {
 		} finally {
@@ -87,6 +106,7 @@ const AuthForm = ({ isRegistration, currentBreakpoint }) => {
 				<Input
 					value={email.value}
 					onChange={setEmail}
+					status={email.status}
 					label="Email"
 					placeholder="Type your email"
 					additionalWindClasses={commonInputClasses}
@@ -96,6 +116,7 @@ const AuthForm = ({ isRegistration, currentBreakpoint }) => {
 					type="password"
 					value={password.value}
 					onChange={setPassword}
+					status={password.status}
 					label="Password"
 					placeholder="Type your password"
 					additionalWindClasses={commonInputClasses}
