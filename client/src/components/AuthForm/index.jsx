@@ -20,7 +20,7 @@ import { useEffect } from 'react'
 const { error, success, initial } = INPUTS_STATUS
 
 const AuthForm = ({ isRegistration, currentBreakpoint }) => {
-	const [userData, setUserData] = useRecoilState(user)
+	const [, setUserData] = useRecoilState(user)
 	const [email, setEmail] = useState({ value: '', status: initial })
 	const [password, setPassword] = useState({ value: '', status: initial })
 	const [confirmPassword, setConfirmPassword] = useState({
